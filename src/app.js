@@ -27,7 +27,7 @@ app.post("/musicians/add/:name/:instrument", async (req, res) => {
     res.json(await Musician.findOne({ where: { name: req.params.name } }));
 })
 
-app.post("/musicians/:id/:name/:instrument", async (req, res) => {
+app.put("/musicians/:id/:name/:instrument", async (req, res) => {
     let musc = await Musician.findByPk(req.params.id);
     await musc.update({
         name: req.params.name,
@@ -36,7 +36,7 @@ app.post("/musicians/:id/:name/:instrument", async (req, res) => {
     res.send(musc)
 })
 
-app.post("/musicians/delete/:id", async (req, res) => {
+app.delete("/musicians/delete/:id", async (req, res) => {
     let musc = await Musician.findByPk(req.params.id);
     let response = await musc.destroy();
     res.send(response);

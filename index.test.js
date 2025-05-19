@@ -35,13 +35,13 @@ describe('./musicians endpoint', () => {
     })
 
     test("Testing if post can change an entry", async () => {
-        const response = await request(app).post("/musicians/1/marcel/guitar");
+        const response = await request(app).put("/musicians/1/marcel/guitar");
         expect(response.statusCode).toBe(200);
         expect((await Musician.findByPk(1)).name).toBe("marcel");
     })
 
     test("Testing if can delete something from database", async () => {
-        const response = await request(app).post("/musicians/delete/3");
+        const response = await request(app).delete("/musicians/delete/3");
         expect(response.statusCode).toBe(200);
         expect(await Musician.findByPk(3)).toBe(null);
     })
