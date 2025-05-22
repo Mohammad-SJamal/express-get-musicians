@@ -27,8 +27,11 @@ describe('./musicians endpoint', () => {
     })
 
     test("Testing if can add new musicians", async () => {
-        const response = await request(app).post("/musicians/add/john/triangle");
+        const response = await request(app)
+            .post("/musicians")
+            .send({ name: "john", instrument: "triangle" });
         expect(response.statusCode).toBe(200);
+        console.log(response.text);
         expect((await Musician.findOne({ where : {
             name: "john"
         }})).name).toBe(JSON.parse(response.text).name);
